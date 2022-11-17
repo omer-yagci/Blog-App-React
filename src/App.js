@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userObserver } from "./auth/firebase";
 import { useEffect } from "react";
 function App() {
+  // ! Firebase userObserver
   const currentUser = useSelector((state) => state.user);
   const dispatch = useDispatch();
   useEffect(() => {
