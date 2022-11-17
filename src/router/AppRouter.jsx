@@ -4,6 +4,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import DashBoard from "../pages/Dashboard";
 import Navbar from "../components/Navbar";
+import About from "../pages/About";
 
 const AppRouter = () => {
   return (
@@ -13,8 +14,7 @@ const AppRouter = () => {
         <Route path="/" element={<DashBoard />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
-        {/* <Route path="turkeyprovinces" element={<TurkeyProvinces />} /> */}
-        {/* <Route path="/weather:cityName" element={<Weather />} /> */}
+        <Route path="about" element={<About />} />
       </Routes>
     </BrowserRouter>
   );
