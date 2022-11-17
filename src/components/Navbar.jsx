@@ -10,12 +10,17 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { logOut } from "../auth/firebase";
 
 export default function MenuAppBar() {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const currentUser = useSelector((state) => state.user);
+  const { username } = useSelector((state) => state.auth.user);
+  console.log(username);
+
+  // const dispatch = useDispatch();
+
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -33,6 +38,16 @@ export default function MenuAppBar() {
         break;
       case "About":
         navigate("about");
+        break;
+      case "Logout":
+        logOut();
+        navigate("/login");
+        break;
+      case "New Blog":
+        navigate("newblog");
+        break;
+      case "Update Blog":
+        navigate("updateblog");
         break;
 
       default:
@@ -68,7 +83,7 @@ export default function MenuAppBar() {
               >
                 <AccountCircle />
               </IconButton>
-              {currentUser && (
+              {username && (
                 <Menu
                   id="menu-appbar"
                   anchorEl={anchorEl}
@@ -89,7 +104,7 @@ export default function MenuAppBar() {
                   <MenuItem onClick={handleClose}>Logout</MenuItem>
                 </Menu>
               )}
-              {!currentUser && (
+              {!username && (
                 <Menu
                   id="menu-appbar"
                   anchorEl={anchorEl}
