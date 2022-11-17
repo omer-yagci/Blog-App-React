@@ -74,16 +74,10 @@ export const logOut = () => {
   // !SweetAlerts HERE!!!
   toastWarnNotify("logged out successfully");
 };
-export const signIn = async (username, email, password, navigate, dispatch) => {
+export const signIn = async (email, password, navigate) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
-    dispatch(
-      setUser({
-        displayName: username,
-        email: email,
-        password: password,
-      })
-    );
+
     navigate("/");
     toastSuccessNotify("Login successfully!");
   } catch (error) {

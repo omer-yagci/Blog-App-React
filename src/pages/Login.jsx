@@ -1,9 +1,7 @@
-// import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { signIn, signUpProvider } from "../auth/firebase";
-// import { setUser } from "../features/authSlice";
 
 const Login = () => {
   const [loginUser, setLoginUser] = useState({
@@ -18,13 +16,7 @@ const Login = () => {
   };
   const handleClick = (e) => {
     e.preventDefault();
-    signIn(
-      loginUser.username,
-      loginUser.email,
-      loginUser.password,
-      navigate,
-      dispatch
-    );
+    signIn(loginUser.username, loginUser.email, loginUser.password, navigate);
   };
 
   return (

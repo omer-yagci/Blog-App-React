@@ -7,6 +7,7 @@ import { useEffect } from "react";
 function App() {
   // ! Firebase userObserver
   const currentUser = useSelector((state) => state.user);
+  console.log(currentUser);
   const dispatch = useDispatch();
   useEffect(() => {
     userObserver(dispatch);

@@ -17,8 +17,8 @@ export default function MenuAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const { displayName } = useSelector((state) => state.auth.user);
-  // console.log(username);
 
+  // console.log(displayName);
   // const dispatch = useDispatch();
 
   const handleMenu = (event) => {
@@ -49,7 +49,6 @@ export default function MenuAppBar() {
       case "Update Blog":
         navigate("updateblog");
         break;
-
       default:
         break;
     }
