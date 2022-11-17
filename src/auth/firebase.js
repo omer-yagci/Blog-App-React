@@ -45,11 +45,10 @@ export const createUser = async (email, password, navigate, displayName) => {
     await updateProfile(auth.currentUser, {
       displayName: displayName,
     });
-    // SweetAlertsRegister();
+
     navigate("/");
     console.log(userCredential);
   } catch (error) {
-    // SweetAlertsError(error);
     console.log(error);
   }
 };
@@ -67,15 +66,13 @@ export const userObserver = (dispatch) => {
       );
     } else {
       dispatch(clearUser());
-      console.log("user signed out");
     }
   });
 };
-export const logOut = (navigate, dispatch) => {
+export const logOut = () => {
   signOut(auth);
-  dispatch(clearUser());
+  // !SweetAlerts HERE!!!
   toastWarnNotify("logged out successfully");
-  navigate("/login");
 };
 export const signIn = async (username, email, password, navigate, dispatch) => {
   try {
@@ -87,7 +84,7 @@ export const signIn = async (username, email, password, navigate, dispatch) => {
         password: password,
       })
     );
-    navigate("/home");
+    navigate("/");
     toastSuccessNotify("Login successfully!");
   } catch (error) {
     toastErrorNotify(error.message);
@@ -106,7 +103,7 @@ export const signUpProvider = (navigate, dispatch) => {
           email: user.email,
         })
       );
-      navigate("/home");
+      navigate("/");
       toastSuccessNotify("Login successfully!!");
     })
     .catch((error) => {
