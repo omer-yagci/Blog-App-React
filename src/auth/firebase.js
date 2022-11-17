@@ -60,7 +60,7 @@ export const userObserver = (dispatch) => {
       const { email, displayName } = user;
       dispatch(
         setUser({
-          username: displayName,
+          displayName: displayName,
           email: email,
         })
       );
@@ -79,7 +79,7 @@ export const signIn = async (username, email, password, navigate, dispatch) => {
     await signInWithEmailAndPassword(auth, email, password);
     dispatch(
       setUser({
-        username: username,
+        displayName: username,
         email: email,
         password: password,
       })

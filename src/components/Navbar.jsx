@@ -16,8 +16,8 @@ export default function MenuAppBar() {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const { username } = useSelector((state) => state.auth.user);
-  console.log(username);
+  const { displayName } = useSelector((state) => state.auth.user);
+  // console.log(username);
 
   // const dispatch = useDispatch();
 
@@ -83,7 +83,7 @@ export default function MenuAppBar() {
               >
                 <AccountCircle />
               </IconButton>
-              {username && (
+              {displayName && (
                 <Menu
                   id="menu-appbar"
                   anchorEl={anchorEl}
@@ -104,7 +104,7 @@ export default function MenuAppBar() {
                   <MenuItem onClick={handleClose}>Logout</MenuItem>
                 </Menu>
               )}
-              {!username && (
+              {!displayName && (
                 <Menu
                   id="menu-appbar"
                   anchorEl={anchorEl}
