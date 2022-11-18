@@ -33,7 +33,13 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const provider = new GoogleAuthProvider();
 
-export const createUser = async (email, password, navigate, displayName) => {
+export const createUser = async (
+  email,
+  password,
+  navigate,
+  displayName,
+  dispatch
+) => {
   try {
     let userCredential = await createUserWithEmailAndPassword(
       auth,
@@ -45,6 +51,12 @@ export const createUser = async (email, password, navigate, displayName) => {
     await updateProfile(auth.currentUser, {
       displayName: displayName,
     });
+    dispatch(
+      setUser({
+        displayName: displayName,
+        email: email,
+      })
+    );
 
     navigate("/");
     console.log(userCredential);
@@ -77,7 +89,13 @@ export const logOut = () => {
 export const signIn = async (email, password, navigate) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
-
+    // dispatch(
+    //   setUser({
+    //     displayName: username,
+    //     email: email,
+    //     password: password,
+    //   })
+    // );
     navigate("/");
     toastSuccessNotify("Login successfully!");
   } catch (error) {
