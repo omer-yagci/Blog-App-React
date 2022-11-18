@@ -26,7 +26,7 @@ export const AddUser = (values) => {
 // Bilgi Çağırma
 
 export const useFetch = () => {
-  const [isLoading, setIsLoading] = useState();
+  const [isLoading, setIsLoading] = useState(true);
   const [contactList, setContactList] = useState();
   useEffect(() => {
     const db = getDatabase(firebase);
