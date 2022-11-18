@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { AddUser } from "../auth/functions";
+import { useNavigate } from "react-router-dom";
 
 const NewBlog = () => {
   const changeHandler = (event) => {
@@ -14,6 +15,7 @@ const NewBlog = () => {
     content: "",
   };
   const [values, setValues] = useState(initialValues);
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -23,6 +25,7 @@ const NewBlog = () => {
     // console.log("asdasdsad");
     AddUser(values);
     setValues(initialValues);
+    navigate("/");
   };
   return (
     <div className="flex justify-center items-center mt-6 ">
