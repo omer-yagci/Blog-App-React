@@ -10,7 +10,7 @@ function App() {
   // console.log(currentUser);
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("yuseefect");
+    // console.log("yuseefect");
     userObserver(dispatch);
   }, [currentUser]);
   return (
