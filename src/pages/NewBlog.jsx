@@ -20,8 +20,9 @@ const NewBlog = () => {
     // console.log(values.title);
     // console.log(values.image);
     // console.log(values.content);
-    console.log("asdasdsad");
+    // console.log("asdasdsad");
     AddUser(values);
+    setValues(initialValues);
   };
   return (
     <div className="flex justify-center items-center mt-6 ">
