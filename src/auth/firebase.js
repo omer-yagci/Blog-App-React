@@ -90,13 +90,7 @@ export const logOut = () => {
 export const signIn = async (email, password, navigate) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
-    // dispatch(
-    //   setUser({
-    //     displayName: username,
-    //     email: email,
-    //     password: password,
-    //   })
-    // );
+
     navigate("/");
     toastSuccessNotify("Login successfully!");
   } catch (error) {
