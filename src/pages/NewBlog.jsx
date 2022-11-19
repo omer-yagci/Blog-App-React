@@ -3,8 +3,12 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { AddUser } from "../auth/functions";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const NewBlog = () => {
+  const { displayName, email } = useSelector((state) => state.auth.user);
+  // console.log(displayName, email);
+
   const changeHandler = (event) => {
     const { name, value } = event.target;
     setValues({ ...values, [name]: value });
@@ -19,11 +23,7 @@ const NewBlog = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // console.log(values.title);
-    // console.log(values.image);
-    // console.log(values.content);
-    // console.log("asdasdsad");
-    AddUser(values);
+    AddUser(values, displayName, email);
     setValues(initialValues);
     navigate("/");
   };
