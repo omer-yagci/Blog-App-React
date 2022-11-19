@@ -12,7 +12,7 @@ import { useState, useEffect } from "react";
 
 // Bilgi Ekleme
 
-export const AddUser = (values) => {
+export const AddUser = (values, displayName, email) => {
   const db = getDatabase(firebase);
   const userRef = ref(db, "users/");
   const newUserRef = push(userRef);
@@ -20,6 +20,8 @@ export const AddUser = (values) => {
     title: values.title,
     image: values.image,
     content: values.content,
+    username: displayName,
+    userEmail: email,
   });
 };
 
