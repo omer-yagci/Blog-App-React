@@ -8,8 +8,9 @@ import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
 
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const BlogCard = ({ element }) => {
@@ -41,6 +42,10 @@ const BlogCard = ({ element }) => {
             <Typography variant="body2" color="text.secondary">
               {content}
             </Typography>
+          </CardContent>
+          <CardContent>
+            <FavoriteBorderIcon />
+            <ModeCommentOutlinedIcon />
           </CardContent>
         </Card>
       }
