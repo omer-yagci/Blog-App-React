@@ -6,13 +6,15 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const NewBlog = () => {
+  // !Redux States
   const { displayName, email } = useSelector((state) => state.auth.user);
-  // console.log(displayName, email);
 
+  // ! ONCHANGE HANDLER
   const changeHandler = (event) => {
     const { name, value } = event.target;
     setValues({ ...values, [name]: value });
   };
+  // !INITIAL VALUES
   const initialValues = {
     title: "",
     image: "",
@@ -21,12 +23,29 @@ const NewBlog = () => {
   const [values, setValues] = useState(initialValues);
   const navigate = useNavigate();
 
+  // !SUMBIT HANDLER
   const handleSubmit = (event) => {
     event.preventDefault();
-    AddUser(values, displayName, email);
+
+    const date = new Date();
+
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    };
+    const currentDate = date.toLocaleTimeString("tr-TR", options);
+    // console.log(currentDate);
+
+    AddUser(values, displayName, email, currentDate);
     setValues(initialValues);
     navigate("/");
   };
+
   return (
     <div className="flex justify-center items-center mt-6 ">
       <div className=" ml-5  p-5  bg-yellow-50 border-2 border-slate-400 rounded w-96">
