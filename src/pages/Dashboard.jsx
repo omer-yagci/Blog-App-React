@@ -1,7 +1,7 @@
 import React from "react";
 import { useFetch } from "../auth/functions";
 import BlogCard from "../components/BlogCard";
-import Spinner from "../helpers/Spinner";
+// import Spinner from "../helpers/Spinner";
 
 const DashBoard = () => {
   const { isLoading, contactList } = useFetch();
@@ -20,10 +20,14 @@ const DashBoard = () => {
           There are no blogs go to the new blog page to create a new blog
         </h1>
       )}
-      {!isLoading &&
-        contactList?.map((element, index) => {
-          return <BlogCard key={index} element={element} />;
-        })}
+
+      {!isLoading && (
+        <div className="flex flex-wrap gap-6 justify-center items-center">
+          {contactList?.map((element, index) => {
+            return <BlogCard key={index} element={element} />;
+          })}
+        </div>
+      )}
     </div>
   );
 };
