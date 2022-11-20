@@ -46,8 +46,8 @@ export default function MenuAppBar() {
       case "New Blog":
         navigate("newblog");
         break;
-      case "Update Blog":
-        navigate("updateblog");
+      case "Dashboard":
+        navigate("/");
         break;
       default:
         break;
@@ -90,7 +90,7 @@ export default function MenuAppBar() {
                   onClose={handleClose}
                 >
                   <MenuItem onClick={handleClose}>New Blog</MenuItem>
-                  <MenuItem onClick={handleClose}>Update Blog</MenuItem>
+                  <MenuItem onClick={handleClose}>Dashboard</MenuItem>
                   <MenuItem onClick={handleClose}>Logout</MenuItem>
                 </Menu>
               )}
