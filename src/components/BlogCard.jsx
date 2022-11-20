@@ -13,9 +13,9 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const BlogCard = ({ element }) => {
-  const { displayName, email } = useSelector((state) => state.auth.user);
+  // const { displayName, email } = useSelector((state) => state.auth.user);
 
-  const { image, content, title, userEmail, username } = element;
+  const { image, content, title, userEmail, username, currentDate } = element;
 
   const navigate = useNavigate();
 
@@ -24,67 +24,26 @@ const BlogCard = ({ element }) => {
   };
   return (
     <div>
-      {email === userEmail ? (
+      {
         <Card onClick={detailsHandler} sx={{ maxWidth: 345, margin: "1rem" }}>
           <CardHeader
             avatar={
               <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                {
-                  // email !== userEmail
-                  // ? displayName?.toUpperCase().charAt(0)
-                  //   : displayName?.toUpperCase().charAt(0)
-                  // {displayName?.toUpperCase().charAt(0)}
-                  username
-                }
+                {username?.toUpperCase().charAt(0)}
               </Avatar>
             }
             action={<IconButton aria-label="settings"></IconButton>}
             title={title}
-            subheader="September 14, 2016"
+            subheader={currentDate}
           />
-          <CardMedia
-            component="img"
-            height="100"
-            image={image}
-            alt="Paella dish"
-          />
+          <CardMedia component="img" height="100" image={image} alt="image" />
           <CardContent>
             <Typography variant="body2" color="text.secondary">
               {content}
             </Typography>
           </CardContent>
         </Card>
-      ) : (
-        <Card sx={{ maxWidth: 345, margin: "1rem" }}>
-          <CardHeader
-            avatar={
-              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                {
-                  // email !== userEmail
-                  // ? displayName?.toUpperCase().charAt(0)
-                  //   : displayName?.toUpperCase().charAt(0)
-                  // {displayName?.toUpperCase().charAt(0)}
-                  displayName
-                }
-              </Avatar>
-            }
-            action={<IconButton aria-label="settings"></IconButton>}
-            title={title}
-            subheader="September 14, 2016"
-          />
-          <CardMedia
-            component="img"
-            height="100"
-            image={image}
-            alt="Paella dish"
-          />
-          <CardContent>
-            <Typography variant="body2" color="text.secondary">
-              {content}
-            </Typography>
-          </CardContent>
-        </Card>
-      )}
+      }
     </div>
   );
 };
