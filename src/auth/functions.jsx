@@ -54,10 +54,10 @@ export const DeleteUser = (id) => {
   // Toastify("Deleted Successfully");
 };
 
-export const UpdateUser = (values) => {
+export const UpdateUser = (items) => {
   const db = getDatabase(firebase);
   const updates = {};
-  updates["users/" + values.id] = values;
+  updates["users/" + items.id] = items;
 
   return update(ref(db), updates);
 };
