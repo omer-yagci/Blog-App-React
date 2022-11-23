@@ -14,7 +14,7 @@ const Modal = ({ update, setUpdate, id }) => {
   const updateHandler = (id) => {
     const items = contactList.find((item) => item.id === id);
     items.title = update.title;
-    items.imageURL = update.imageURL;
+    items.image = update.imageURL;
     items.content = update.content;
     UpdateUser(items);
     navigate("/");
