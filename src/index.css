@@ -42,3 +42,10 @@
 .button-55:focus {
   box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 4px -6px;
 }
+
+.newBlog {
+  background-image: url("https://cosmosmagazine.com/wp-content/uploads/2022/02/GettyImages-1285751129-min.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 91vh;
+}
