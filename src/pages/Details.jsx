@@ -51,7 +51,7 @@ const Details = () => {
             <Modal update={update} setUpdate={setUpdate} id={id} />
           )}
         </Card>
-        <button
+        {/* <button
           className=" font-bold bg-slate-300 text-2xl text-center mt-2 w-[300px] border-2 block mx-auto shadow-md shadow-black rounded-lg active:scale-95 mb-6"
           onClick={() => setOpenComment(!openComment)}
         >
@@ -66,7 +66,7 @@ const Details = () => {
             ))
           ) : (
             <div className="ml">No Comment</div>
-          ))}
+          ))} */}
       </div>
     </>
   );
