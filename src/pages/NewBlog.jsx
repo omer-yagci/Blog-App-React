@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import { AddUser } from "../auth/functions";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { toastWarnNotify } from "../helpers/ToastNotify";
 
 const NewBlog = () => {
   // !Redux States
@@ -20,15 +21,14 @@ const NewBlog = () => {
     image: "",
     content: "",
   };
+  const [comment, setComment] = useState([]);
   const [values, setValues] = useState(initialValues);
   const navigate = useNavigate();
 
   // !SUMBIT HANDLER
   const handleSubmit = (event) => {
     event.preventDefault();
-
     const date = new Date();
-
     const options = {
       weekday: "long",
       year: "numeric",
@@ -40,9 +40,14 @@ const NewBlog = () => {
     };
     const currentDate = date.toLocaleTimeString("tr-TR", options);
 
-    AddUser(values, displayName, email, currentDate);
-    setValues(initialValues);
-    navigate("/");
+    if (values.title && values.image && values.content) {
+      setComment(comment);
+      AddUser(values, displayName, email, currentDate, comment);
+      setValues(initialValues);
+      navigate("/");
+    } else {
+      toastWarnNotify("Required field cannot be left blank");
+    }
   };
 
   return (
