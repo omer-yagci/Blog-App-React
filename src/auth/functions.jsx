@@ -12,7 +12,7 @@ import { useState, useEffect } from "react";
 
 // Bilgi Ekleme
 
-export const AddUser = (values, displayName, email, currentDate) => {
+export const AddUser = (values, displayName, email, currentDate, comment) => {
   const db = getDatabase(firebase);
   const userRef = ref(db, "users/");
   const newUserRef = push(userRef);
@@ -23,6 +23,7 @@ export const AddUser = (values, displayName, email, currentDate) => {
     username: displayName,
     userEmail: email,
     currentDate: currentDate,
+    comment: comment,
   });
 };
 
@@ -58,6 +59,11 @@ export const UpdateUser = (items) => {
   const db = getDatabase(firebase);
   const updates = {};
   updates["users/" + items.id] = items;
-
+  return update(ref(db), updates);
+};
+export const UpdateComment = (items) => {
+  const db = getDatabase(firebase);
+  const updates = {};
+  updates["users/" + items.id] = items;
   return update(ref(db), updates);
 };
