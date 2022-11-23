@@ -16,12 +16,7 @@ const Login = () => {
   };
   const handleClick = (e) => {
     e.preventDefault();
-    signIn(
-      loginUser.email,
-      loginUser.password,
-      navigate
-      
-    );
+    signIn(loginUser.email, loginUser.password, navigate);
   };
 
   return (

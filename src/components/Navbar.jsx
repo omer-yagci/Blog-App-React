@@ -10,16 +10,12 @@ import Menu from "@mui/material/Menu";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { logOut } from "../auth/firebase";
-// import MenuIcon from "@mui/icons-material/Menu";
 
 export default function MenuAppBar() {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const { displayName } = useSelector((state) => state.auth.user);
-
-  // console.log(displayName);
-  // const dispatch = useDispatch();
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -59,6 +55,7 @@ export default function MenuAppBar() {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <h1 className="text-2xl uppercase">Welcome</h1>
             <h1 className="text-2xl uppercase">{displayName}</h1>
           </Typography>
           {
