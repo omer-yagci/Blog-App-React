@@ -5,6 +5,7 @@ import { AddUser } from "../auth/functions";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toastWarnNotify } from "../helpers/ToastNotify";
+// import NewBlogIMG from "../assests/newblog.png";
 
 const NewBlog = () => {
   // !Redux States
@@ -51,8 +52,15 @@ const NewBlog = () => {
   };
 
   return (
-    <div className="flex justify-center items-center mt-6 ">
-      <div className=" ml-5  p-5  bg-yellow-50 border-2 border-slate-400 rounded w-96">
+    <div className=" newBlog flex justify-center items-center h-[100vh]">
+      <div className=" ml-5  p-5  bg-slate-200 border-2 border-slate-400 rounded w-96">
+        <div className=" flex justify-center items-center">
+          <img
+            className="w-[5rem]"
+            src="https://images.squarespace-cdn.com/content/v1/5ce872eef661b5000171f98c/1560198336054-QGZ1VIH4EJK94AHZ2FLY/new-blog.gif"
+            alt="gif"
+          />
+        </div>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="title">
             <Form.Label>Title</Form.Label>
@@ -67,7 +75,7 @@ const NewBlog = () => {
           <Form.Group className="mb-3" controlId="image">
             <Form.Label>Image URL</Form.Label>
             <Form.Control
-              type="text"
+              type="url"
               name="image"
               placeholder="image url here"
               onChange={changeHandler}

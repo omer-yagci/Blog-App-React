@@ -1,41 +1,47 @@
 import * as React from "react";
-
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
-
-import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
 import LikeButton from "../components/LikeButton";
-
+import CommentModal from "./CommentModal";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
-import CommentModal from "./CommentModal";
 import { UpdateComment, useFetch } from "../auth/functions";
+import { randombgColor } from "../helpers/RandomBgColor";
+import commentIcon from "../assests/comment.png";
+import { toastErrorNotify } from "../helpers/ToastNotify";
 
 const BlogCard = ({ element }) => {
-  const { contactList } = useFetch();
-  const { email } = useSelector((state) => state.auth.user);
+  const [mouseOver, setMouseOver] = React.useState(false);
 
+  const { contactList } = useFetch();
+  const { email, displayName } = useSelector((state) => state.auth.user);
+
+  // !COMMENT STATE
   const [commented, setCommented] = React.useState("");
   const [count, setCount] = React.useState();
+  // !MODAL SHOW STATE
   const [show, setShow] = React.useState(false);
 
+  // !COLOR STATE
+  const [color, setColor] = React.useState(randombgColor());
   // ! Destruc.
   const { image, content, title, username, currentDate, id } = element;
 
   const navigate = useNavigate();
 
+  // !HANDLER
   const detailsHandler = () => {
-    navigate("/details", { state: element });
+    if (!displayName) {
+      toastErrorNotify("You must login to see details");
+      navigate("/login");
+    } else {
+      navigate("/details", { state: element });
+    }
   };
-  console.log(id);
-  console.log(commented);
 
   const addComment = (id) => {
     if (count.length >= 20) {
@@ -45,42 +51,66 @@ const BlogCard = ({ element }) => {
       commentArray?.comment.push(userComments);
       UpdateComment(commentArray);
     } else {
-      console.log("hata");
+      toastErrorNotify("yorum yok");
     }
   };
+  // !USEEFFECT
   React.useEffect(() => {
     setCount(commented.split(""));
   }, [commented]);
 
+  const modalHandler = () => {
+    if (!displayName) {
+      toastErrorNotify("You must login to comment");
+    } else {
+      setShow(!show);
+    }
+  };
   return (
     <div>
       {
-        <Card sx={{ maxWidth: 345, margin: "1rem" }}>
+        <Card
+          sx={{
+            maxWidth: 300,
+            margin: "1rem",
+          }}
+        >
           <CardHeader
+            className="bg-white border-b-2"
+            onMouseOver={() => setMouseOver(true)}
+            onMouseLeave={() => setMouseOver(false)}
+            title={mouseOver && username.toUpperCase()}
             avatar={
-              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+              <Avatar
+                sx={{ bgcolor: color, border: "1px solid black " }}
+                aria-label="recipe"
+              >
                 {username?.toUpperCase().charAt(0)}
               </Avatar>
             }
-            action={<IconButton aria-label="settings"></IconButton>}
-            title={title}
-            subheader={currentDate}
           />
-
           <CardMedia
-            className="rounded-full w-[100rem] mx-auto"
+            className="hover:cursor-pointer"
+            sx={{
+              maxHeight: 200,
+              // maxWidth: 200,
+              // borderRadius: "2rem",
+              // padding: "1rem",
+              margin: "0 auto",
+            }}
             onClick={detailsHandler}
             component="img"
-            // height="100"
+            height="100"
             image={image}
             alt="image"
           />
+          <CardHeader title={title} subheader={currentDate} />
 
-          <CardContent>
+          <CardContent className="bg-slate-200 mt-[0.5rem]">
             <Typography
               className="text-ellipsis overflow-hidden whitespace-nowrap"
               variant="body2"
-              color="text.secondary"
+              color="text.primary"
             >
               {content}
             </Typography>
@@ -88,16 +118,19 @@ const BlogCard = ({ element }) => {
           <CardContent className=" flex justify-around items-center">
             <LikeButton />
 
-            <ModeCommentOutlinedIcon
+            <img
+              style={{ width: "6%" }}
               className="hover:cursor-pointer"
               data-bs-toggle="modal"
               data-bs-target={`#${id}`}
-              onClick={() => setShow(!show)}
+              onClick={modalHandler}
+              src={commentIcon}
+              alt="icon"
             />
           </CardContent>
         </Card>
       }
-      {show && (
+      {show && displayName && (
         <CommentModal
           id={id}
           setCommented={setCommented}
